@@ -28,13 +28,4 @@ class Project {
 }
 
 
-class VotingSystem {
-    private ArrayList<Project> projects;
 
-    public VotingSystem() {
-        projects = new ArrayList<>();
-    }
-
-    public void addProject(String projectName) {
-        projects.add(new Project(projectName));
-    }
