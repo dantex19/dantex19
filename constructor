@@ -1,31 +1,49 @@
-import java.util.Scanner;
+public class Ballot {
 
-class Project {
-    private String name;
-    private int votes;
+    public static void main(String[] args) {
+    private Candidate candidate;
+    private Student student;
+    private String constId;
 
-    public Project(String name) {
-        this.name = name;
-        this.votes = 0;
+    public Ballot(){}
+    public Ballot(Candidate candidate, Student student, String constId) {
+        this.candidate = candidate;
+        this.student = student;
+        this.constId = constId;
     }
 
-    public String getName() {
-        return name;
+    public String getConstId() {
+        return constId;
     }
 
-    public int getVotes() {
-        return votes;
+    public void setConstId(String constId) {
+        this.constId = constId;
     }
 
-    public void addVote() {
-        votes++;
+    public Candidate getCandidate() {
+        return candidate;
     }
 
- 
-    public String toString() {
-        return name + " has " + votes + " vote(s)";
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
+
+    /**
+     *
+     * @return
+     */
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setParty(Student student) {
+        this.student = student;
+    }
+
+    private static class Student {
+
+        public Student() {
+        }
+    }
+
 }
-
-
-
