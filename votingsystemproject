@@ -1,0 +1,123 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+class Candidate {
+    private String name;
+    private int votes;
+
+    public Candidate(String name) {
+        this.name = name;
+        this.votes = 0;
+    }
+
+  
+    public void addVote() {
+        this.votes++;
+    }
+
+    // Getters for candidate's name and votes
+    public String getName() {
+        return name;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+}
+
+
+class Voter {
+    private String name;
+
+   
+    public Voter(String name) {
+        this.name = name;
+    }
+
+ 
+    public String getName() {
+        return name;
+    }
+}
+
+
+class VotingSystem {
+    private List<Candidate> candidates;
+    private List<Voter> voters;
+
+   
+    public VotingSystem() {
+        candidates = new ArrayList<>();
+        voters = new ArrayList<>();
+    }
+
+  
+    public void addCandidate(Candidate candidate) {
+        candidates.add(candidate);
+    }
+
+    // Method to register a voter
+    public void registerVoter(Voter voter) {
+        voters.add(voter);
+    }
+
+
+    public void castVote(String voterName, String candidateName) {
+        for (Voter voter : voters) {
+            if (voter.getName().equalsIgnoreCase(voterName)) {
+                for (Candidate candidate : candidates) {
+                    if (candidate.getName().equalsIgnoreCase(candidateName)) {
+                        candidate.addVote();
+                        System.out.println(voterName + " voted for " + candidateName);
+                        return;
+                    }
+                }
+                System.out.println("Candidate not found!");
+                return;
+            }
+        }
+        System.out.println("Voter not registered!");
+    }
+
+    // Method to display the results
+    public void displayResults() {
+        System.out.println("\nVoting Results:");
+        for (Candidate candidate : candidates) {
+            System.out.println(candidate.getName() + ": " + candidate.getVotes() + " votes");
+        }
+    }
+}
+
+// Main class 
+public class VotingSystemApp {
+    public static void main(String[] args) {
+        VotingSystem votingSystem = new VotingSystem();
+        
+        // Adding candidates
+        votingSystem.addCandidate(new Candidate("Messi"));
+        votingSystem.addCandidate(new Candidate("Ronaldo"));
+        
+        // Registering voters
+        votingSystem.registerVoter(new Voter("Mbappe"));
+        votingSystem.registerVoter(new Voter("Camavinga"));
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        // Simulating voting process
+        System.out.println("Voting System");
+        for (int i = 0; i < 2; i++) { // Allow two votes for demonstration
+            System.out.print("Enter your name: ");
+            String voterName = scanner.nextLine();
+            System.out.print("Enter candidate name to vote for: ");
+            String candidateName = scanner.nextLine();
+            votingSystem.castVote(voterName, candidateName);
+        }
+        
+        // Displaying results
+        votingSystem.displayResults();
+        
+        scanner.close();
+    }
+}
